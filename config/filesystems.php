@@ -59,15 +59,26 @@ return [
             'visibility' => 'public',
         ],
 
-        's3' => [
+        // 's3' => [
+        //     'driver' => 's3',
+        //     'key' => env('AWS_ACCESS_KEY_ID'),
+        //     'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        //     'region' => env('AWS_DEFAULT_REGION'),
+        //     'bucket' => env('AWS_BUCKET'),
+        //     'url' => env('AWS_URL'),
+        //     'endpoint' => env('AWS_ENDPOINT'),
+        //     // 'visibility' => 'public', // https://statamic.dev/assets#visibility
+        // ],
+
+        'wasabi' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            // 'visibility' => 'public', // https://statamic.dev/assets#visibility
+            'key' => env('WASABI_ACCESS_KEY'),
+            'secret' => env('WASABI_SECRET_KEY'),
+            'region' => env('WASABI_DEFAULT_REGION'),
+            'bucket' => env('WASABI_BUCKET'),
+            'url' => env('WASABI_URL'),
+            'endpoint' => env('WASABI_ENDPOINT'),
+            'visibility' => 'public', // https://statamic.dev/assets#visibility
         ],
 
         'assets' => [

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Git Integration
@@ -74,8 +73,8 @@ return [
     'use_authenticated' => true,
 
     'user' => [
-        'name' => env('STATAMIC_GIT_USER_NAME', 'Spock'),
-        'email' => env('STATAMIC_GIT_USER_EMAIL', 'spock@example.com'),
+        'name' => env('STATAMIC_GIT_USER_NAME', 'STATAMIC'),
+        'email' => env('STATAMIC_GIT_USER_EMAIL', 'git@handmadeweb.com.au'),
     ],
 
     /*
@@ -99,6 +98,7 @@ return [
         resource_path('users'),
         storage_path('forms'),
         public_path('assets'),
+        storage_path('statamic/addons'),
     ],
 
     /*
@@ -170,5 +170,4 @@ return [
     */
 
     'locale' => env('STATAMIC_GIT_LOCALE', null),
-
 ];
