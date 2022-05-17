@@ -81,6 +81,17 @@ return [
             'visibility' => 'public', // https://statamic.dev/assets#visibility
         ],
 
+        // 'wasabi-glide' => [
+        //     'driver' => 's3',
+        //     'key' => env('WASABI_ACCESS_KEY'),
+        //     'secret' => env('WASABI_SECRET_KEY'),
+        //     'region' => env('WASABI_DEFAULT_REGION'),
+        //     'bucket' => '',
+        //     'url' => '',
+        //     'endpoint' => env('WASABI_ENDPOINT'),
+        //     'visibility' => 'public', // https://statamic.dev/assets#visibility
+        // ],
+
         'assets' => [
             'driver' => 'local',
             'root' => public_path('assets'),

@@ -2,8 +2,8 @@
 
 use Statamic\Assets\Asset;
 
-if (! function_exists('glide_url')) {
-    function glide_url(string | Asset $asset, array $params = [])
+if (!function_exists('glide_url')) {
+    function glide_url(string|Asset $asset, array $params = [])
     {
         if ($asset instanceof Asset) {
             $asset = $asset->id();
@@ -16,5 +16,27 @@ if (! function_exists('glide_url')) {
         $params['src'] = $asset;
 
         return tag('glide', $params);
+    }
+}
+
+if (!function_exists('zipper_url')) {
+    function zipper_url(string $filename, array $files)
+    {
+        if (!class_exists(\Aerni\Zipper\ZipperController::class)) {
+            return null;
+        }
+
+        $files = collect($files)->map(function ($item) {
+            if ($item instanceof \Statamic\Assets\Asset) {
+                return $item->id();
+            }
+
+            return $item;
+        });
+
+        return action([\Aerni\Zipper\ZipperController::class, 'create'], [
+            'filename' => $filename,
+            'files' => $files->toArray(),
+        ]);
     }
 }

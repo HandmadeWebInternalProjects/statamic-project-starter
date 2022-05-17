@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default search index
@@ -24,10 +23,17 @@ return [
     */
 
     'indexes' => [
-
         'default' => [
             'driver' => 'local',
             'searchables' => 'all',
+            'fields' => ['title'],
+        ],
+
+        'basic-search' => [
+            'driver' => 'local',
+            'searchables' => [
+                'collection:pages',
+            ],
             'fields' => ['title'],
         ],
 
@@ -35,7 +41,6 @@ return [
         //     'driver' => 'local',
         //     'searchables' => 'collection:blog',
         // ],
-
     ],
 
     /*
@@ -51,7 +56,6 @@ return [
     */
 
     'drivers' => [
-
         'local' => [
             'path' => storage_path('statamic/search'),
         ],
@@ -62,7 +66,6 @@ return [
                 'secret' => env('ALGOLIA_SECRET', ''),
             ],
         ],
-
     ],
 
     /*
@@ -78,5 +81,4 @@ return [
     'defaults' => [
         'fields' => ['title'],
     ],
-
 ];
