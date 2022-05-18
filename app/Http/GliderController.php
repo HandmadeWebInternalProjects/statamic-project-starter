@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Statamic\Http\Controllers\GlideController;
 use Statamic\Statamic;
 
@@ -27,6 +28,10 @@ class GliderController extends GlideController
 
         $glideUrl = Statamic::tag('glide')->params($params)->fetch();
 
-        return redirect($glideUrl, 302);
+        if (Str::startsWith($glideUrl, config('filesystems.disks.wasabi-glide.url'))) {
+            return redirect($glideUrl, 302);
+        }
+
+        return abort(401);
     }
 }
