@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
+use Statamic\Facades\Glide;
 use Statamic\Http\Controllers\GlideController;
 use Statamic\Statamic;
 
@@ -23,12 +24,17 @@ class GliderController extends GlideController
         // Convert first / in url back to :: as we will base the ID from that.
         $path = Str::replaceFirst('/', '::', $path);
 
-        $params = request()->except(['id', 'src', 'path']);
-        $params['src'] = $path;
+        $params = request()->except(['src', 'id', 'path']);
 
-        $glideUrl = Statamic::tag('glide')->params($params)->fetch();
+        $glideUrl = Glide::cacheStore()->rememberForever('asset::'.$path.'::'.md5(json_encode($params)), function () use ($path, $params) {
+            return Statamic::tag('glide')->params(array_merge(['src' => $path], $params))->fetch();
+        });
 
-        if (Str::startsWith($glideUrl, config('filesystems.disks.wasabi-glide.url'))) {
+        if ($glideUrl) {
+            $glideUrl = Str::startsWith($glideUrl, Glide::url()) ? $glideUrl : Glide::url().'/'.$glideUrl;
+        }
+
+        if (Str::startsWith($glideUrl, Glide::url())) {
             return redirect($glideUrl, 302);
         }
 
